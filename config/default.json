@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb://phoenixxx:purple_power_100@ds137801.mlab.com:37801/nidahasa",
+    "jwtSecret": "myJWTSecret"
+}
