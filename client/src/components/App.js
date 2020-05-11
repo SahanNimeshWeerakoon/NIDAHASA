@@ -10,6 +10,8 @@ import Navbar from './Navbar';
 import LoginRegister from './login_register/LoginRegister';
 const Route = require('react-router-dom').Route;
 import { loadUser } from '../actions/authActions';
+import Manager from './loggedIn/Manager';
+import AddPlace from './loggedIn/AddPlace';
 
 class App extends Component {
     componentDidMount() {
@@ -22,14 +24,10 @@ class App extends Component {
                 <Router>
                     <div>
                         <Navbar />
-                        
                         <Route path="/" component={ TopPlaces } exact={true} />
                         <Route path="/login_register" component={ LoginRegister } exact={true} />
-                        
-                        {/* <h1>React Boilerplate</h1>
-                        <PostForm />
-                        <Posts /> */}
-                        {/* <TopPlaces /> */}
+                        <Route path="/manager" component={ Manager } exact={true} />
+                        <AddPlace />
                     </div>
                 </Router>
             </Provider>

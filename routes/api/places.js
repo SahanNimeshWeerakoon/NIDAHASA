@@ -16,27 +16,35 @@ router.get('/', (req, res) => {
 // @route       POST /api/place
 // @desc        Save a new place
 // @access      public
-router.post('/new', auth, (req, res) => {
+// router.post('/new', auth, (req, res) => {
+router.post('/new', (req, res) => {
     const { title, description, location, user_id, shared_count, images } = req.body;
-    if(!title || !description || !location || !user_id) {
-        const prop = !title ? "title" : !description ? "description" : !location ? "location" : !user_id ? "user id" : "";
-        return res.status(400).json({ success: false, type: prop, msg: `Please fill the ${prop} field` });
-    }
+    // if(!title || !description || !location || !user_id) {
+    //     const prop = !title ? "title" : !description ? "description" : !location ? "location" : !user_id ? "user id" : "";
+    //     return res.status(400).json({ success: false, type: prop, msg: `Please fill the ${prop} field` });
+    // }
 
-    const newPlace = new Place({
-        title: req.body.title,
-        description: req.body.description,
-        location: req.body.location,
-        likes_count: req.body.likes_count,
-        user_id: req.body.user_id,
-        shared_count: req.body.shared_count,
-        images: req.body.images
-    });
+    
 
-    newPlace
-        .save()
-        .then(place => res.json(place))
-        .catch(err => res.json(err));
+    // const newPlace = new Place({
+    //     title: title,
+    //     description: description,
+    //     location: location,
+    //     likes_count: 0,
+    //     user_id: user_id,
+    //     shared_count: 0,
+    //     images: images
+    // });
+
+    console.log(req.body);
+
+    // newPlace
+    //     .save()
+    //     .then(place => {
+
+    //         res.json(place);
+    //     })
+    //     .catch(err => res.json(err));
 });
 
 // @route       DELETE /api/place

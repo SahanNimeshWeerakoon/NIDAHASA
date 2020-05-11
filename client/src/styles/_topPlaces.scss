@@ -1,18 +1,5 @@
 $place-transition: 1s;
 $below-ele-margin: 5px 5px;
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    .cell {
-        padding: 3px;
-    }
-    .cell-3 {
-        width: 24%;
-    }
-}
 
 .card, .image, .image img, .title, .body {
 	width: 100%;
