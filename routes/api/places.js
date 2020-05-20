@@ -1,50 +1,80 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
+const path = require('path');
+
 
 const Place = require('../../models/Place');
 
 // @route       GET /api/placesd
 // @desc        Get all the places
 // @access      public
-router.get('/', (req, res) => {
-    Place.find()
-        .sort({ created_date: -1 })
-        .then(places => res.json(places));
+router.get('/:id?', (req, res) => {
+    const userId = req.params.id;
+    if(userId) {
+        Place.find({ user_id: userId })
+            .sort({ created_date: -1 })
+            .then(places => res.json(places));
+    } else {
+        Place.find()
+            .sort({ created_date: -1 })
+            .then(places => res.json(places));
+    }
 });
 
 // @route       POST /api/place
 // @desc        Save a new place
 // @access      public
-// router.post('/new', auth, (req, res) => {
-router.post('/new', (req, res) => {
-    const { title, description, location, user_id, shared_count, images } = req.body;
-    // if(!title || !description || !location || !user_id) {
-    //     const prop = !title ? "title" : !description ? "description" : !location ? "location" : !user_id ? "user id" : "";
-    //     return res.status(400).json({ success: false, type: prop, msg: `Please fill the ${prop} field` });
-    // }
+router.post('/new', auth, (req, res) => {
+    const { title, description, location, userId, imagesCount } = JSON.parse(req.body.fields);
+    var images = [];
+    let imageNames = [];
 
-    
+    for(var i=0; i<imagesCount; i++) {
+        images.push(req.files[`image${i}`]);
+    }
 
-    // const newPlace = new Place({
-    //     title: title,
-    //     description: description,
-    //     location: location,
-    //     likes_count: 0,
-    //     user_id: user_id,
-    //     shared_count: 0,
-    //     images: images
-    // });
+    if(!title || !description || !location) {
+        const prop = !title ? "title" : !description ? "description" : !location ? "location" : !user_id ? "user id" : "";
+        return res.status(400).json({ success: false, type: prop, msg: `Please fill the ${prop} field` });
+    }
 
-    console.log(req.body);
+    if(images.length !== 0) {
+        images.forEach((image, index) => {
+            
+            let name = image.name;
+            name = name.split('.');
+            name = name[0]+'-'+Math.round(Math.random()*10000000000)+'.'+name[1];
 
-    // newPlace
-    //     .save()
-    //     .then(place => {
+            image.mv(path.join(`${__dirname}`, `../../client/dist/images/places/${name}`), err => {
+                if(err) {
+                    console.log(err);
+                }
+            });
+            imageNames.push(name);
+        });
+    } else {
+        console.log('no images');
+    }
 
-    //         res.json(place);
-    //     })
-    //     .catch(err => res.json(err));
+    imageNames = imageNames.join(",").replace("\"", "");
+
+    const newPlace = new Place({
+        title: title,
+        description: description,
+        location: location,
+        likes_count: 0,
+        user_id: userId,
+        shared_count: 0,
+        images: JSON.stringify(imageNames)
+    });
+
+    newPlace
+        .save()
+        .then(place => {
+            res.json(place);
+        })
+        .catch(err => res.json(err));
 });
 
 // @route       DELETE /api/place

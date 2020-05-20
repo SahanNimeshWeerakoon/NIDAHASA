@@ -26,8 +26,7 @@ class LoginRegister extends Component{
 
     render() {
         const { switchState } = this.state;
-        return (
-            <div className="login-register">
+        const loginRegisterCont = (
                 <div className="log-reg-form">
                     <div className="log-reg-switch" onClick={this.handleSwitchClick}>
                         <div className={switchState ? "log-reg-bg-color" : "log-reg-bg-color log-reg-bg-right"}></div>
@@ -43,7 +42,10 @@ class LoginRegister extends Component{
                         <Register />
                     </div>
                 </div>
-                {this.props.isAuthenticated ? <Redirect to="/" /> : null}
+            );
+        return (
+            <div className="login-register">
+                {this.props.isAuthenticated ? <Redirect to="/Manager" /> : loginRegisterCont}
             </div>
         );
     }

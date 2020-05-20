@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import Posts from './Posts';
 import PostForm from './PostForm';
-import { Provider } from 'react-redux';
 import store from '../store';
 import TopPlaces from './landing/TopPlaces';
-import '../styles/App.scss';
-import { BrowserRouter as Router, Link } from 'react-router-dom'
 import Navbar from './Navbar';
 import LoginRegister from './login_register/LoginRegister';
-const Route = require('react-router-dom').Route;
-import { loadUser } from '../actions/authActions';
 import Manager from './loggedIn/Manager';
 import AddPlace from './loggedIn/AddPlace';
+import PlacesList from './loggedIn/PlacesList';
+import ManagerCard from './loggedIn/ManagerCard';
+import SinglePlace from './public/SinglePlace';
+import Test from './Test';
+import { loadUser } from '../actions/authActions';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+const Route = require('react-router-dom').Route;
+import '../styles/App.scss';
 
 class App extends Component {
     componentDidMount() {
@@ -25,11 +30,14 @@ class App extends Component {
                     <div>
                         <Navbar />
                         <Route path="/" component={ TopPlaces } exact={true} />
-                        <Route path="/login_register" component={ LoginRegister } exact={true} />
-                        <Route path="/manager" component={ Manager } exact={true} />
-                        <AddPlace />
+                        <Route path="/login_register" component={ LoginRegister } />
+                        <Route path="/manager" component={ Manager } />
+                        <Route path="/addplace" component={ AddPlace } />
+                        <Route path="/viewplaceslist" component={ PlacesList } />
+                        <Route path="/singlePlace" component={ SinglePlace } />
                     </div>
                 </Router>
+                {/*<Test />*/}
             </Provider>
         );
     }

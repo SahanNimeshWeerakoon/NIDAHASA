@@ -18,7 +18,7 @@ const PlaceSchema = new Schema({
         type: Number
     },
     user_id: {
-        type: Number,
+        type: String,
         required: true
     },
     shared_count: {

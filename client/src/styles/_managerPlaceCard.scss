@@ -1,0 +1,46 @@
+.manager-place-card {
+	width: 24%;
+	height: 140px;
+	.dark-overlay {
+		background: #000;
+		position: relative;
+		img {
+			position: relative;
+			z-index: 1;
+			opacity: 0.3;
+			width: 100%;
+		}
+		.content {
+			position: absolute;
+			z-index: 2;
+			top: 10px;
+			left: 10px;
+			p {
+				font-weight: bold;
+				color: #DDD;
+			}
+			small {
+				color: #CCC;
+			}
+		}
+		.edit-place {
+			position: absolute;
+			right: 10px;
+			bottom: -15px;
+			display: inline-block;
+			padding: 10px;
+			border-radius: 50%;
+			background: $register-gradient;
+			z-index: 3;
+			transition: 0.5s;
+			&:hover {
+				background: $login-gradient;
+				box-shadow: 2px 2px 2px #fff;
+				transform: scale(1.05);
+			}
+			.edit {
+				color: #fff;
+			}
+		}
+	}
+}

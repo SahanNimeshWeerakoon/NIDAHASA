@@ -9,11 +9,11 @@ const express = require('express'),
     config = require('config');
 
 // Middleware
-const app = express();      // initializing the app
-app.use(express.json()); // giving body-parser as middleware
-app.use(cors());            // cross origin middleware
-app.use(fileUpload());      // file upload
-app.use(express.static('client/dist'));   // use images as middleware
+const app = express();                      // initializing the app
+app.use(express.json());                    // giving body-parser as middleware
+app.use(cors());                            // cross origin middleware
+app.use(fileUpload());                      // file upload
+app.use(express.static('client/dist'));     // use images as middleware
 
 // Connect to mongodb
 const db = config.get("mongoURI");

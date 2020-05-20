@@ -1,4 +1,4 @@
-import { FETCH_PLACES, PLACES_LOADING, NEW_PLACE } from '../actions/types';
+import { FETCH_PLACES, PLACES_LOADING, NEW_PLACE, CLEAR_PLACE } from '../actions/types';
 
 const initialState = {
     places: [],
@@ -20,10 +20,14 @@ export default (state=initialState, action) => {
                 loading: true
             }
         case NEW_PLACE:
-        console.log({"placeReducer": action.payload});
             return {
                 ...state,
                 place: action.payload
+            };
+        case CLEAR_PLACE:
+            return {
+                ...state,
+                place: {}
             };
         default:
             return state;
