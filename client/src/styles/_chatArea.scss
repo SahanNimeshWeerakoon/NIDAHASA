@@ -1,0 +1,91 @@
+.chat-area {
+	width: 90%;
+	margin: 50px auto;
+	box-shadow: 2px 2px 5px #999;
+	display: flex;
+	.chat-list {
+		width: 35%;
+		border-right: 1px solid $text-color;
+		> div {
+			padding: 10px;
+		}
+		.chat-list-header {
+			background: $login-gradient;
+			@include user-details(60px, 20px, 5px);
+			p {
+				color: #999;
+			}
+		}
+		.chat-list-body {
+			.user {
+				@include user-details(60px, 20px, 5px);
+				margin-bottom: 5px;
+				&.active {
+					box-shadow: 1px 1px 1px 1px  $text-color;
+				}
+			}
+		}
+	}
+	.chat-box {
+		width: 65%;
+		position: relative;
+		.chat-header {
+			background: $register-gradient;
+			@include user-details(60px, 20px, 5px);
+			p {
+				color: #DDD;
+			}
+		}
+		.chat-body {
+			padding: 10px 30px;
+			.message-group {
+				width: 80%;
+				margin-bottom: 10px;
+				&.owner {
+					margin-right: 0;
+					margin-left: auto;
+					p.username {
+						text-align: right;
+					}
+				}
+				p{
+					font-size: 0.8em;
+					&.username {
+						font-weight: bold;
+						color: $gradient-light;
+						&.owner {
+							color: #000;
+						}
+					}
+					&.message {
+						color: $text-color;
+					}
+				}
+			}
+		}
+		.chat-footer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			input {
+				width: 84%;
+				border: none;
+				border-top: 1px solid $text-color;
+				color: #fff;
+				padding: 1%;
+			}
+			button {
+				padding: 1%;
+				width: 14%; 
+				border: none;
+				border-top: 1px solid $text-color;
+				background: $gradient-dark;
+				color: #fff;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}

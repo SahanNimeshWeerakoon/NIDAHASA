@@ -11,10 +11,12 @@ import PlacesList from './loggedIn/PlacesList'
 import ManagerCard from './loggedIn/ManagerCard'
 import SinglePlace from './public/SinglePlace'
 import UpdatePlaceImages from './loggedIn/UpdatePlaceImages'
-import Test from './Test'
 import { loadUser } from '../actions/authActions'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { Provider } from 'react-redux'
+
+import Test from './Test'
+import ChatArea from './loggedIn/ChatArea'
 
 const Route = require('react-router-dom').Route
 import '../styles/App.scss'
@@ -27,7 +29,8 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Router>
+                <ChatArea isAdmin={true} />
+                {/*<Router>
                     <div>
                         <Navbar />
                         <Route path="/" component={ TopPlaces } exact={true} />
@@ -38,7 +41,7 @@ class App extends Component {
                         <Route path="/singlePlace/:id" component={ SinglePlace } />
                         <Route path="/updateImages/:id" component={ UpdatePlaceImages } />
                     </div>
-                </Router>
+                </Router>*/}
                 {/*<Test />*/}
             </Provider>
         )

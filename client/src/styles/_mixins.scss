@@ -12,3 +12,18 @@
 	left: $left;
 	bottom: $bottom;
 }
+
+// chat area User image and name field
+@mixin user-details($img-width, $p-padding, $body-padding) {
+	display: flex;
+	align-items: center;
+	padding: $body-padding;
+	img {
+		width: $img-width;
+		height: $img-width;
+		border-radius: 50%;
+	}
+	p {
+		padding-left: $p-padding;
+	}
+}
