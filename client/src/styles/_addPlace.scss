@@ -1,3 +1,39 @@
+@mixin add-place-btn {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background: #49657b;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    font-size: 1.2em;
+    border: none;
+}
+
+.update-place-images {
+    .prev-images {
+        display: flex;
+        justify-content: center;
+        .img-bkgrnd {
+            width: 24%;
+            margin: 1px;
+            background-image: url('http://localhost:5000/images/places/xmark.jpeg');
+            background-size: cover;
+            img {
+                width: 100%;
+                transition: 0.5s;
+                &:hover {
+                    cursor: pointer;
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+    button.add-place-btn {
+        @include add-place-btn;
+    }
+}
+
 .add-place {
     background: #e0e0e0;
     min-height: 100vh;
@@ -17,15 +53,7 @@
                 margin-top: 35px;
             }
             button.add-place-btn {
-                width: 100%;
-                padding: 10px 0;
-                text-align: center;
-                background: #49657b;
-                color: #fff;
-                font-weight: bold;
-                letter-spacing: 0.1em;
-                font-size: 1.2em;
-                border: none;
+                @include add-place-btn;
             }
         }
         .help {

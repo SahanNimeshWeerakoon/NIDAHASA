@@ -28,7 +28,7 @@ export const fetchUserPlaces = userId => dispatch => {
 
 export const fetchSinglePlace = placeId => dispatch => {
     axios
-        .get(`http://localhost:5000/api/place/${placeId}`)
+        .get(`http://localhost:5000/api/places/place/${placeId}`)
         .then(res => {
             dispatch({
                 type: NEW_PLACE,
@@ -53,6 +53,19 @@ export const newPlace = (place) => (dispatch, getState) => {
     } catch(e) {
         console.log(e);
     }
+}
+
+export const updatePlace = (id, updateObj) => (dispatch, getState) => {
+    const config = tokenConfig(getState);
+
+    axios
+        .put(`http://localhost:5000/api/places/${id}`, updateObj, config)
+        .then(res => {
+            dispatch({
+                type: NEW_PLACE,
+                payload: res.data
+            });
+        });
 }
 
 export const clearPlace = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 
-const ManagerPlaceCard = ({ src, title, description }) => {
+const ManagerPlaceCard = ({ src, title, description, id }) => {
 	return (
 		<div className="manager-place-card">
 			<div className="dark-overlay">
@@ -11,7 +11,7 @@ const ManagerPlaceCard = ({ src, title, description }) => {
 					<p>{title}</p>
 					<small>{description}</small>
 				</div>
-				<NavLink to="/" className="edit-place" ><FaEdit className="edit" /></NavLink>
+				<NavLink to={`/singlePlace/${id}`} className="edit-place" ><FaEdit className="edit" /></NavLink>
 			</div>
 		</div>
 	);

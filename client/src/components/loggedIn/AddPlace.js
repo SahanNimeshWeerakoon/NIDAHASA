@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageUpload from './ImageUpload';
+import ImageUpload from '../modules/ImageUpload';
 import { Redirect } from 'react-router-dom';
 import { newPlace } from '../../actions/placeAction';
 import { connect } from 'react-redux'

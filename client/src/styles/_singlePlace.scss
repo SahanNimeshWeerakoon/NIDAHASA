@@ -1,0 +1,96 @@
+.single-place {
+	text-align: center;
+	.fields {
+		width: default;
+		small {
+			width: 100%;
+			color: $text-color;
+			text-align: left;
+		}
+	}
+	.image{
+		.edit {
+			@include edit-button(15px, $register-gradient, relative, 3, -20px, 15px, auto, auto);
+			float: right;
+		}
+	}
+	.reacts {
+		position: absolute;
+		top: 100px;
+		right: 20px;
+		z-index: 3;
+		.like {
+			&:hover {
+				cursor: pointer;
+				.heart {
+					opacity: 0.7;
+				}
+			}
+			.heart {
+				color: red;
+				font-size: 2.5em;
+				display: block;
+				opacity: 0.5;
+			}
+			small {
+				font-size: 1.5em;
+				color: red;
+			}
+		}
+	}
+	.posted-on {
+		width: 25%;
+		display: block;
+		margin: 30px 0 auto auto;
+		text-align: right;
+		color: #888;
+	}
+	.title {
+		input {
+			font-size: 2em;
+			text-align: center;
+			color: $gradient-dark;
+		}
+		.edit {
+			//@include edit-button(10px, $register-gradient, relative, 3, -15px, -100px, auto, auto);
+			@include edit-button(8px, $register-gradient, absolute, 3, -10px, 0, auto, auto);
+		}
+	}
+	.container {
+		.description {
+			display: block;
+			position: relative;
+			textarea{
+				width: 100%;
+				color: $text-color;
+				font-size: 1em;
+			}
+			.edit {
+				@include edit-button(8px, $register-gradient, absolute, 3, -10px, 0, auto, auto);
+			}
+		}
+		.location {
+			display: block;
+			position: relative;
+			margin-top: 20px;
+			h4 {
+				text-align: left;
+			}
+			label {
+				text-align: left;
+				width: 100%;
+				display: block;
+				font-size: 0.9em;
+				color: $text-color;
+			}
+			input {
+				width: 100%;
+				color: $text-color;
+				margin-bottom: 10px;
+			}
+			.edit {
+				@include edit-button(8px, $register-gradient, absolute, 3, 0px, 0, auto, auto);
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+// edit button
+@mixin edit-button($padding, $background, $position, $zindex, $top, $right, $bottom, $left) {
+	display: inline-block;
+	padding: $padding;
+	border-radius: 50%;
+	background: $background;
+	position: $position;
+	z-index: $zindex;
+	color: #fff;
+	top: $top;
+	right: $right;
+	left: $left;
+	bottom: $bottom;
+}

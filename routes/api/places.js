@@ -2,13 +2,11 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const path = require('path');
+const fs = require('fs');
 
 
 const Place = require('../../models/Place');
 
-// @route       GET /api/placesd
-// @desc        Get all the places
-// @access      public
 router.get('/:id?', (req, res) => {
     const userId = req.params.id;
     if(userId) {
@@ -22,9 +20,76 @@ router.get('/:id?', (req, res) => {
     }
 });
 
-// @route       POST /api/place
-// @desc        Save a new place
-// @access      public
+router.get('/place/:id', (req, res) => {
+    const placeId = req.params.id;
+    if(placeId) {
+        Place
+            .findOne({ _id: placeId })
+            .then(place => {
+                res.json(place);
+            })
+            .catch(err => {
+                res.status(400).json({"msg": "Wrong Id"});
+            });
+    }
+});
+
+router.put('/:id', (req, res) => {
+    const id = req.params.id;
+
+    if(req.body.hasOwnProperty('fields')) {
+        const { userId, imagesCount, oldImages } = JSON.parse(req.body.fields);
+        var images = [];
+        var imageNames = [];
+
+        // putting images in an array to save later
+        for(var i=0; i<imagesCount; i++) {
+            images.push(req.files[`image${i}`]);
+        }
+
+        if(images.length !== 0) {
+            // iterating through image obj arrays
+            images.forEach( (image, index) => {
+                // Generating unique name
+                let name = image.name;
+                name = name.split('.');
+                name = name[0]+'-'+Math.round(Math.random()*10000000000)+'.'+name[1];
+                // Moving to a path
+                image.mv(path.join(`${__dirname}`, `../../client/dist/images/places/${name}`), err => {
+                    if(err) {
+                        console.log(err);
+                    }
+                });
+                // imagesNames is to save the name in db
+                imageNames.push(name);
+            } );
+        }
+
+        Place
+            .findById(id)
+            .then(place => {
+                var prevImgs = place.images.replace(/\"/g, "").split(",");
+                prevImgs.forEach((prevImg, index) => {
+                    if(!oldImages.includes(prevImg)) {
+                        fs.unlinkSync(path.join(`${__dirname}`, `../../client/dist/images/places/${prevImg}`));
+                    }
+                });
+
+                const finalImgArr = oldImages.concat(imageNames);
+
+                Place
+                    .findOneAndUpdate({ _id: id }, {"images": finalImgArr.join(",")}, { new: true, useFindAndModify: false })
+                    .then(place => res.json(place));
+
+            });
+
+    } else {
+        Place
+            .findOneAndUpdate({ _id: id }, req.body, { new: true, useFindAndModify: false })
+            .then(place => res.json(place));
+    }
+});
+
 router.post('/new', auth, (req, res) => {
     const { title, description, location, userId, imagesCount } = JSON.parse(req.body.fields);
     var images = [];
@@ -77,9 +142,6 @@ router.post('/new', auth, (req, res) => {
         .catch(err => res.json(err));
 });
 
-// @route       DELETE /api/place
-// @desc        Delete a place
-// @access      public
 router.delete('/:id', auth, (req, res) => {
     Place
         .findById(req.params.id)
@@ -92,9 +154,6 @@ router.delete('/:id', auth, (req, res) => {
         .catch(err => res.json(err));
 });
 
-// @route       POST /api/place/uploadplace
-// @desc        Upload images of the places
-// @access      public
 router.post('/uploadplace', auth, (req, res) => {
     if(req.files === null) {
         return res.status(400).json({msg: 'No file uploaded'});

@@ -28,7 +28,7 @@ const PlacesList = ({ clearPlace, fetchUserPlaces, auth, places }) => {
 					const image = place.hasOwnProperty("images") ? place.images.split(',')[0].replace("\"", "") : "no_image.jpg";
 					return (
 							<div className="container" key={place._id}>
-								<ManagerPlaceCard src={image} title={place.title} description={place.description} />
+								<ManagerPlaceCard src={image} title={place.title} description={place.description} id={place._id} />
 							</div>
 						);
 				}) }

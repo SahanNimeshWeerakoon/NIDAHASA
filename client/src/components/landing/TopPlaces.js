@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPlaces } from '../../actions/placeAction';
+import { NavLink } from 'react-router-dom';
 
 class TopPlaces extends Component {
     componentWillMount() {
@@ -21,10 +22,10 @@ class TopPlaces extends Component {
                         <p className="body-text">{place.description}</p>
                     </div>
                     <div className="button">
-                        <a href="#" className="liquid-button">
+                        <NavLink to={`/singlePlace/${place._id}`} className="liquid-button">
                             <span>Try place out</span>
                             <div className="liquid"></div>
-                        </a>
+                        </NavLink>
                     </div>
                 </div>
             );
