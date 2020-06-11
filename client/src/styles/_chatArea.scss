@@ -72,8 +72,11 @@
 				width: 84%;
 				border: none;
 				border-top: 1px solid $text-color;
-				color: #fff;
 				padding: 1%;
+				&:focus {
+					color: #464646;
+					outline: none;
+				}
 			}
 			button {
 				padding: 1%;

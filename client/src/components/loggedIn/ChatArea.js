@@ -1,18 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ChatBox from '../modules/ChatBox'
 import ChatList from '../modules/ChatList'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-const ChatArea = ({ isAdmin }) => {
-	return (
-		<div className="chat-area">
-			<div className="chat-list">
-				<ChatList />
+class ChatArea extends Component {
+	render() {
+		const { auth } = this.props
+		const id = this.props.match.params.id
+		return (
+			<div className="chat-area">
+				<div className="chat-list">
+					<ChatList receiverId={id} />
+				</div>
+				<div className='chat-box'>
+					<ChatBox receiverId={id} />
+				</div>
+	            { auth.isAuthenticated ? null : <Redirect to="/login_register" /> }
 			</div>
-			<div className={`chat-box ${isAdmin ? 'admin' : ''}`}>
-				<ChatBox />
-			</div>
-		</div>
-	)
+		)
+	}
 }
 
-export default ChatArea
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
+export default connect(mapStateToProps)(ChatArea)

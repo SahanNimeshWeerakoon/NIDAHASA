@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import Carousel from '../modules/Carousel'
 import { connect } from 'react-redux'
 import { fetchSinglePlace, updatePlace } from '../../actions/placeAction'
-import { FaHeart, FaEdit, FaCheck } from 'react-icons/fa'
+import { FaHeart, FaEdit, FaCheck, FaComments } from 'react-icons/fa'
 
 class SinglePlace extends Component {
 	constructor(props) {
@@ -61,7 +61,6 @@ class SinglePlace extends Component {
 	}
 
 	handleClick = (e, clicked) => {
-		console.log('test')
 		const targetName = e.target.getAttribute('name')
 		const id = this.props.match.params.id
 
@@ -88,6 +87,7 @@ class SinglePlace extends Component {
 	render() {
 		const place  = this.props.places.place
 		const { isAdmin } = this.state
+		const { isAuthenticated } = this.props.auth
 		var images = ['no_image.jpg', 'no_image.jpg']
 	    var content = (
 	    	<h1>No Content</h1>
@@ -139,6 +139,7 @@ class SinglePlace extends Component {
 							{ isAdmin ? longitude.clicked ? <FaCheck name="longitude" className="edit check" onClick={(e) => this.handleClick(e, false)} /> : <FaEdit className="edit" name="longitude" onClick={(e) => this.handleClick(e, true)} /> : null }
 						</span>
 					</div>
+					{ isAuthenticated ? !isAdmin ? <NavLink to={`/chat/${place.user_id}`} className="chat-owner" title="Chat with owner"><FaComments /></NavLink> : null : null }
 				</Fragment>
 			)
 	    }

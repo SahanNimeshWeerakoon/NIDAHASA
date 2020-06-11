@@ -14,3 +14,6 @@ export const GET_ERRORS =  'GET_ERRORS';
 export const CLEAR_ERRORS =  'CLEAR_ERRORS';
 export const NEW_PLACE =  'NEW_PLACE';
 export const CLEAR_PLACE =  'CLEAR_PLACE';
+export const SET_RECEIVER =  'SET_RECEIVER';
+export const GET_CHAT_LIST =  'GET_CHAT_LIST';
+export const GET_CHAT =  'GET_CHAT';

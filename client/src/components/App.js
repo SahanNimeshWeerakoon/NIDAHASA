@@ -29,8 +29,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <ChatArea isAdmin={true} />
-                {/*<Router>
+                <Router>
                     <div>
                         <Navbar />
                         <Route path="/" component={ TopPlaces } exact={true} />
@@ -40,8 +39,9 @@ class App extends Component {
                         <Route path="/viewplaceslist" component={ PlacesList } />
                         <Route path="/singlePlace/:id" component={ SinglePlace } />
                         <Route path="/updateImages/:id" component={ UpdatePlaceImages } />
+                        <Route path="/chat/:id" component={ ChatArea } />
                     </div>
-                </Router>*/}
+                </Router>
                 {/*<Test />*/}
             </Provider>
         )
