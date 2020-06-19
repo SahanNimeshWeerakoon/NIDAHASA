@@ -56,6 +56,7 @@ a {
             border: none;
             border-bottom: 1px dotted #AAA;
             transition: $transition;
+            background: transparent;
             &:focus {
                 outline: none;
                 border-bottom: 1px solid $text-color;

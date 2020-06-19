@@ -27,9 +27,8 @@ class ChatBox extends Component {
 			console.log(messageFromBackEnd)
 		})
 
-		this.setState({
-			chatHistory: loadChat(auth.user._id, receiverId)
-		})
+		loadChat(auth.user._id, receiverId)
+
 	}
 
 	handleChange = e => {
@@ -56,6 +55,15 @@ class ChatBox extends Component {
 
 	render() {
 
+		const { chat, auth } = this.props
+
+		const prevChatList = chat.chatList.length!==0 ? chat.chatList.map(chatItem => (
+			<div className={`message-group ${auth.user._id===chatItem.sender?'owner':null}`} key={chatItem._id}>
+				<p className={`username ${auth.user._id===chatItem.sender?'owner':null}`}>{ auth.user._id===chatItem.sender ? 'You' : chat.receiver.name }</p>
+				<p className={`message ${auth.user._id===chatItem.sender?'owner':null}`}>{ chatItem.message }</p>
+			</div>
+		)) : null
+
 		return (
 			<Fragment>
 				<div className="chat-header">
@@ -63,14 +71,7 @@ class ChatBox extends Component {
 					<p>{ this.props.chat.receiver ? this.props.chat.receiver.name : null }</p>
 				</div>
 				<div className="chat-body">
-					<div className="message-group">
-						<p className="username">Modith Kavinda</p>
-						<p className="message">Huththo mage sahan gen ath weyan keriya</p>
-					</div>
-					<div className="message-group owner">
-						<p className="username owner">Thavindu Thathsara Samarasinghe</p>
-						<p className="message">Sahan koheda wesa kariyo thoge wenne. Eya hamadama mage witharai. Mageema witharai. Kawadawath apiwa wen karanna ba. Sakkarayatawath ba. Tho mona hipaduwekda?</p>
-					</div>
+					{ prevChatList }
 				</div>
 				<div className="chat-footer">
 					<form onSubmit={this.handleSubmit}>

@@ -4,7 +4,6 @@ import { tokenConfig } from './authActions';
 
 export const fetchPlaces = () => dispatch => {
     dispatch(setPlacesLoading());
-
     axios
         .get('http://localhost:5000/api/places')
         .then(res => {
@@ -13,6 +12,16 @@ export const fetchPlaces = () => dispatch => {
                 payload: res.data
             })
         });
+}
+
+export const fetchRandomPlaces = () => dispatch => {
+    axios.get('http://localhost:5000/api/places/randomplaces')
+        .then(res => {
+            dispatch({
+                type: FETCH_PLACES,
+                payload: res.data
+            })
+        })
 }
 
 export const fetchUserPlaces = userId => dispatch => {

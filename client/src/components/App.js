@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Posts from './Posts'
 import PostForm from './PostForm'
 import store from '../store'
-import TopPlaces from './landing/TopPlaces'
 import Navbar from './Navbar'
 import LoginRegister from './login_register/LoginRegister'
 import Manager from './loggedIn/Manager'
@@ -10,6 +9,8 @@ import AddPlace from './loggedIn/AddPlace'
 import PlacesList from './loggedIn/PlacesList'
 import ManagerCard from './loggedIn/ManagerCard'
 import SinglePlace from './public/SinglePlace'
+import ViewPlaces from './public/ViewPlaces'
+import Landing from './public/Landing'
 import UpdatePlaceImages from './loggedIn/UpdatePlaceImages'
 import { loadUser } from '../actions/authActions'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
@@ -32,7 +33,7 @@ class App extends Component {
                 <Router>
                     <div>
                         <Navbar />
-                        <Route path="/" component={ TopPlaces } exact={true} />
+                        <Route path="/" component={ Landing } exact={true} />
                         <Route path="/login_register" component={ LoginRegister } />
                         <Route path="/manager" component={ Manager } />
                         <Route path="/addplace" component={ AddPlace } />
@@ -40,6 +41,7 @@ class App extends Component {
                         <Route path="/singlePlace/:id" component={ SinglePlace } />
                         <Route path="/updateImages/:id" component={ UpdatePlaceImages } />
                         <Route path="/chat/:id" component={ ChatArea } />
+                        <Route path="/allplaces" component={ ViewPlaces } />
                     </div>
                 </Router>
                 {/*<Test />*/}

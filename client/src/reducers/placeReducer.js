@@ -9,6 +9,7 @@ const initialState = {
 export default (state=initialState, action) => {
     switch(action.type) {
         case FETCH_PLACES:
+            console.log(action.payload)
             return {
                 ...state,
                 places: action.payload,

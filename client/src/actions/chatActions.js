@@ -22,7 +22,11 @@ export const loadReceivers = (id) => dispatch => {
 export const loadChat = (sender, receiver) => dispatch => {
 	axios.get(`http://localhost:5000/api/chats/loadchat/${sender}/${receiver}`)
 		.then(res => {
-			return res.data
+			console.log(res)
+			return dispatch({
+				type: GET_CHAT,
+				payload: res.data
+			})
 		})
 		.catch(err => console.log(err))
 }

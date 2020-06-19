@@ -7,6 +7,22 @@ const fs = require('fs');
 
 const Place = require('../../models/Place');
 
+router.get('/randomplaces', (req, res) => {
+    Place.find()
+        .then(places => {
+            let arrLen = places.length;
+            let resArr = [];
+            while(resArr.length < 15 && arrLen!==0) {
+                let index = Math.floor(Math.random()*arrLen);   // Get random index between 0-14
+                resArr.push(places[index]);                 // push selected place to the response array
+                places.splice(index, 1);                    // remove the place from querried array of places
+                arrLen = arrLen-1;
+            }
+            res.json(resArr);
+        })
+        .catch(err => console.log(err));
+});
+
 router.get('/:id?', (req, res) => {
     const userId = req.params.id;
     if(userId) {
@@ -169,6 +185,12 @@ router.post('/uploadplace', auth, (req, res) => {
 
         res.json({ fileName: file.name, filePath: `/places/${file.name}` });
     });
+});
+
+router.get('/', (req, res) => {
+    Place.find()
+        .then(data => res.json(data))
+        .catch(err => console.log(err));
 });
 
 module.exports = router;

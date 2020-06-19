@@ -3,6 +3,7 @@ const router = express.Router();
 const Chat = require('../../models/Chat');
 const User = require('../../models/User');
 
+// get the chated people list to ChatList Component
 router.get('/chatlist/:id', (req, res) => {
 	console.log('chat list requested');
 	Chat.find({ "sender": req.params.id })
@@ -15,13 +16,19 @@ router.get('/chatlist/:id', (req, res) => {
 		.catch(err => console.log(err));
 });
 
+// Get the previous chat for the ChatBox component
 router.get('/loadchat/:sender/:receiver', (req, res) => {
 	const sender = req.params.sender;
 	const receiver = req.params.receiver;
 
-	Chat.find({ sender, receiver })
+	Chat.find({ $or: [
+			{ sender },
+			{ receiver },
+			{ 'sender': receiver },
+			{ 'receiver': sender }
+		] })
 		.then(chats => {
-			console.log(chats)
+			res.json(chats);
 		})
 		.catch(err => console.log(err))
 })

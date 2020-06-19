@@ -1,8 +1,9 @@
-import { SET_RECEIVER, GET_CHAT_LIST } from '../actions/types'
+import { SET_RECEIVER, GET_CHAT_LIST, GET_CHAT } from '../actions/types'
 
 const initialState = {
 	receiver: null,
-	receiversList: []
+	receiversList: [],
+	chatList: []
 }
 
 export default (state=initialState, action) => {
@@ -16,6 +17,11 @@ export default (state=initialState, action) => {
 			return {
 				...state,
 				receiversList: action.payload
+			}
+		case GET_CHAT:
+			return {
+				...state,
+				chatList: action.payload
 			}
 		default:
 			return state

@@ -59,6 +59,9 @@
 					}
 					&.message {
 						color: $text-color;
+						&.owner {
+							text-align: right;
+						}
 					}
 				}
 			}
