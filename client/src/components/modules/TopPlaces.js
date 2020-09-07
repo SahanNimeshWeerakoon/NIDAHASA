@@ -13,7 +13,9 @@ class TopPlaces extends Component {
         }
     }
     render() {
-        const placeItems = this.props.places ? this.props.places.map(place => {
+        const { places, isAllPlaces, startPlace, endPlace } = this.props
+        const minPlaces = isAllPlaces ? places.slice(startPlace, endPlace) : places
+        const placeItems = minPlaces ? minPlaces.map(place => {
             let first_img = place.hasOwnProperty("images") ? place.images.split(',')[0].replace("\"", "") : "no_image.jpg";
             return (
                 <div className="card cell cell-3" key={place._id}>

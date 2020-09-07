@@ -6,7 +6,9 @@ const ManagerPlaceCard = ({ src, title, description, id }) => {
 	return (
 		<div className="manager-place-card">
 			<div className="dark-overlay">
-				<img src={`http://localhost:5000/images/places/${src}`} title={title} alt={title} />
+				<div className="img">
+					<img src={`http://localhost:5000/images/places/${src}`} title={title} alt={title} />
+				</div>
 				<div className="content">
 					<p>{title}</p>
 					<small>{description}</small>

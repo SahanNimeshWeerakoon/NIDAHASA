@@ -20,6 +20,17 @@ module.exports = {
                 }
             },
             {
+                test: /\.(png|jpg|gif)$/i,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192,
+                    },
+                  },
+                ],
+            },
+            {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [
                     {
@@ -39,6 +50,7 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
+        port: 8000
     },
     plugins: [
         new HtmlWebpackPlugin({ template: './src/index.html' })

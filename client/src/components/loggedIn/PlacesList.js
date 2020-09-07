@@ -6,11 +6,22 @@ import ManagerPlaceCard from './ManagerPlaceCard';
 import Pagination from 'react-js-pagination';
 
 const PlacesList = ({ clearPlace, fetchUserPlaces, auth, places }) => {
-	const [activePage, setActivePage] = useState(1);
+	const [activePage, setActivePage] = useState(1)
+	const [itemsPerPage, setitemsPerPage] = useState(8)
+	const [startPage, setStartPage] = useState(0)
+	const [endPage, setEndPage] = useState(startPage+itemsPerPage-1)
 
 	useEffect(() => {
-		clearPlace();
-	}, []);
+		clearPlace()
+	}, [])
+
+	useEffect(() => {
+		const strPg = (activePage-1)*itemsPerPage
+		const endPg = strPg+itemsPerPage
+
+		setStartPage(strPg)
+		setEndPage(endPg)
+	}, [activePage])
 
 	useEffect(() => {
 		if(auth.user) {
@@ -23,27 +34,27 @@ const PlacesList = ({ clearPlace, fetchUserPlaces, auth, places }) => {
 	}
 
 	const placesList = places.length>0 ? (
-			<div className="container">
-				{ places.map(place => {
+			<Fragment>
+				{ places.slice(startPage, endPage).map(place => {
 					const image = place.hasOwnProperty("images") ? place.images.split(',')[0].replace("\"", "") : "no_image.jpg";
 					return (
-							<div className="container" key={place._id}>
-								<ManagerPlaceCard src={image} title={place.title} description={place.description} id={place._id} />
-							</div>
+						<ManagerPlaceCard key={place._id} src={image} title={place.title} description={place.description} id={place._id} />
 						);
 				}) }
-			</div>
+			</Fragment>
 		) : (
 		<p>No have places</p>
-		);
+		)
 
 
 	return (
 		<Fragment>
-			{ placesList }
+			<div className="container places-list" >
+				{ placesList }
+			</div>
 			<Pagination
 		          activePage={activePage}
-		          itemsCountPerPage={10}
+		          itemsCountPerPage={itemsPerPage}
 		          totalItemsCount={places.length>0 ? places.length : 1}
 		          pageRangeDisplayed={((places.length-5)>0) ? 5 : places.length}
 		          onChange={handlePageChange.bind(this)}

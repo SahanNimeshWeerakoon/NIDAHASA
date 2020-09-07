@@ -5,12 +5,22 @@ import Pagination from 'react-js-pagination';
 import { connect } from 'react-redux'
 
 const ViewPlaces = ({ places, fetchPlaces }) => {
-	const [activePage, setActivePage] = useState(1);
+	const [activePage, setActivePage] = useState(1)
+	const [itemsPerPage, setitemsPerPage] = useState(12)
+	const [startPage, setStartPage] = useState(0)
+	const [endPage, setEndPage] = useState(startPage+itemsPerPage-1)
 
 	useEffect(() =>{
 		fetchPlaces()
-		console.log(places)
 	}, [])
+
+	useEffect(() => {
+		const strPg = (activePage-1)*itemsPerPage
+		const endPg = strPg+itemsPerPage
+
+		setStartPage(strPg)
+		setEndPage(endPg)
+	}, [activePage])
 
 	const handlePageChange = (pageNumber) => {
 		setActivePage(pageNumber);
@@ -18,10 +28,10 @@ const ViewPlaces = ({ places, fetchPlaces }) => {
 	
 	return (
 		<div className="view-places container">
-			<TopPlaces isAllPlaces={true} />
+			<TopPlaces isAllPlaces={true} startPlace={startPage} endPlace={endPage} />
 			<Pagination
 		          activePage={activePage}
-		          itemsCountPerPage={10}
+		          itemsCountPerPage={itemsPerPage}
 		          totalItemsCount={places.length>0 ? places.length : 1}
 		          pageRangeDisplayed={((places.length-5)>0) ? 5 : places.length}
 		          onChange={handlePageChange.bind(this)}
@@ -35,7 +45,7 @@ const ViewPlaces = ({ places, fetchPlaces }) => {
 }
 
 const mapStateToProps = state => ({
-	places: state.places
+	places: state.places.places
 })
 
 export default connect(mapStateToProps, { fetchPlaces })(ViewPlaces)

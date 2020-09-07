@@ -12,7 +12,7 @@ router.get('/randomplaces', (req, res) => {
         .then(places => {
             let arrLen = places.length;
             let resArr = [];
-            while(resArr.length < 15 && arrLen!==0) {
+            while(resArr.length < 12 && arrLen!==0) {
                 let index = Math.floor(Math.random()*arrLen);   // Get random index between 0-14
                 resArr.push(places[index]);                 // push selected place to the response array
                 places.splice(index, 1);                    // remove the place from querried array of places
