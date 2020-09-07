@@ -35,4 +35,33 @@
 			}
 		}
 	}
+	.benefits {
+		padding: 20px 30px;
+		margin-top: -110px !important;
+		background: #fff;
+		width: 60%;
+		margin: auto;
+		-webkit-box-shadow: -2px 3px 12px 1px rgba(0,0,0,0.75);
+		-moz-box-shadow: -2px 3px 12px 1px rgba(0,0,0,0.75);
+		box-shadow: -2px 3px 12px 1px rgba(0,0,0,0.75);
+		.benefits-title {
+			color: $blue-grey-five;
+			margin-bottom: 20px;
+		}
+		.row .cell{
+			.row {
+				.ben-ico {
+					font-size: 1.5em;
+					color: $blue-grey-three;
+					width: 100%;
+				}
+				margin-bottom: 30px;
+			}
+			small {
+				font-size: 0.8em;
+				color: $blue-grey-three;
+				margin-top: 5px;
+			}
+		}
+	}
 }
