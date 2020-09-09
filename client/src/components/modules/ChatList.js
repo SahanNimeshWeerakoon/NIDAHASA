@@ -14,6 +14,9 @@ const ChatList = ({ loadReceivers, receiverId, auth, chat }) => {
 		setList(chat.receiversList)
 	}, [chat])
 
+
+	console.log({list, auth});
+
 	const usersList = list.map(receiver => {
 		return (
 			<NavLink to={`/chat/${receiver._id}`} key={receiver._id}>

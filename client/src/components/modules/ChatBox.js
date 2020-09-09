@@ -57,30 +57,38 @@ class ChatBox extends Component {
 
 		const { chat, auth } = this.props
 
-		const prevChatList = chat.chatList.length!==0 ? chat.chatList.map(chatItem => (
-			<div className={`message-group ${auth.user._id===chatItem.sender?'owner':null}`} key={chatItem._id}>
-				<p className={`username ${auth.user._id===chatItem.sender?'owner':null}`}>{ auth.user._id===chatItem.sender ? 'You' : chat.receiver.name }</p>
-				<p className={`message ${auth.user._id===chatItem.sender?'owner':null}`}>{ chatItem.message }</p>
-			</div>
-		)) : null
-
-		return (
-			<Fragment>
-				<div className="chat-header">
-					<img src={`http://localhost:5000/images/profile/noImage.png`} title="Admin title" alt="Admin title" />
-					<p>{ this.props.chat.receiver ? this.props.chat.receiver.name : null }</p>
-				</div>
-				<div className="chat-body">
-					{ prevChatList }
-				</div>
-				<div className="chat-footer">
-					<form onSubmit={this.handleSubmit}>
-						<input type="text" name="chat_message" placeholder="Type here...." value={this.state.chatMessage} onChange={this.handleChange} />
-						<button type="submit"><FaTelegramPlane /></button>
-					</form>
-				</div>
-			</Fragment>
+		var returnData = (
+			<div className="select-chat">Select a chat to proceed</div>
 		)
+
+		if(chat.receiver && chat.receiver.hasOwnProperty('name')) {
+			const prevChatList = chat.chatList.length!==0 ? chat.chatList.map(chatItem => (
+				<div className={`message-group ${auth.user._id===chatItem.sender?'owner':null}`} key={chatItem._id}>
+					<p className={`username ${auth.user._id===chatItem.sender?'owner':null}`}>{ auth.user._id===chatItem.sender ? 'You' : chat.receiver.name }</p>
+					<p className={`message ${auth.user._id===chatItem.sender?'owner':null}`}>{ chatItem.message }</p>
+				</div>
+			)) : null
+
+			returnData = (
+				<Fragment>
+					<div className="chat-header">
+						<img src={`http://localhost:5000/images/profile/noImage.png`} title="Admin title" alt="Admin title" />
+						<p>{ this.props.chat.receiver ? this.props.chat.receiver.name : null }</p>
+					</div>
+					<div className="chat-body">
+						{ prevChatList }
+					</div>
+					<div className="chat-footer">
+						<form onSubmit={this.handleSubmit}>
+							<input type="text" name="chat_message" placeholder="Type here...." value={this.state.chatMessage} onChange={this.handleChange} />
+							<button type="submit"><FaTelegramPlane /></button>
+						</form>
+					</div>
+				</Fragment>
+			)
+		}
+
+		return returnData
 	}
 }
 
