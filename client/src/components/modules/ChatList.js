@@ -7,15 +7,12 @@ const ChatList = ({ loadReceivers, receiverId, auth, chat }) => {
 	const [list, setList] = useState([])
 
 	useEffect(() => {
-		loadReceivers(auth.user._id)
+		if(auth.user) loadReceivers(auth.user._id)
 	}, [])
 
 	useEffect(() => {
 		setList(chat.receiversList)
 	}, [chat])
-
-
-	console.log({list, auth});
 
 	const usersList = list.map(receiver => {
 		return (
@@ -32,7 +29,7 @@ const ChatList = ({ loadReceivers, receiverId, auth, chat }) => {
 		<Fragment>
 			<div className="chat-list-header">
 				<img src={`http://localhost:5000/images/profile/noImage.png`} title="Admin title" alt="Admin title" />
-				<p>{ auth.user.name }</p>
+				<p>{ auth.user && auth.user.name }</p>
 			</div>
 			<div className="chat-list-body">
 				{ usersList }

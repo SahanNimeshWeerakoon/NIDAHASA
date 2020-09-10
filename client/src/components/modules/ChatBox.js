@@ -15,20 +15,23 @@ class ChatBox extends Component {
 	}
 
 	componentDidMount() {
-		let server = "http://localhost:5000"
-
+		
 		const { setReceiver, receiverId, loadChat, auth } = this.props
+		
+		if(auth.user) {
+			let server = "http://localhost:5000"
 
-		setReceiver(receiverId)
 
-		this.socket = io(server)
+			setReceiver(receiverId)
 
-		this.socket.on("Output Chat Message", messageFromBackEnd => {
-			console.log(messageFromBackEnd)
-		})
+			this.socket = io(server)
 
-		loadChat(auth.user._id, receiverId)
+			this.socket.on("Output Chat Message", messageFromBackEnd => {
+				console.log(messageFromBackEnd)
+			})
 
+			loadChat(auth.user._id, receiverId)
+		}
 	}
 
 	handleChange = e => {

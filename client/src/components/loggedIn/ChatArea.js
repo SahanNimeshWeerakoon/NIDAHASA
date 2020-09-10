@@ -8,6 +8,7 @@ class ChatArea extends Component {
 	render() {
 		const { auth } = this.props
 		const id = this.props.match.params.id
+		console.log(auth);
 		return (
 			<div className="chat-area">
 				<div className="chat-list">
@@ -16,7 +17,9 @@ class ChatArea extends Component {
 				<div className='chat-box'>
 					<ChatBox receiverId={id} />
 				</div>
+			{/*
 	            { auth.isAuthenticated ? null : <Redirect to="/login_register" /> }
+			*/}
 			</div>
 		)
 	}
