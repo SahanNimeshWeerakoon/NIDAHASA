@@ -5,13 +5,25 @@ const User = require('../../models/User');
 
 // get the chated people list to ChatList Component
 router.get('/chatlist/:id', (req, res) => {
-	console.log('chat list requested');
-	Chat.find({ "sender": req.params.id })
+	const id = req.params.id
+	Chat.find({ "sender": id })
 		.distinct('receiver')
-		.then(data => {
-			User.find({ '_id': { $in: data } })
-				.then(users => res.json(users))
-				.catch(err => console.log(err));
+		.then(recIds => {
+			Chat.find({ "receiver": id })
+				.distinct('sender')
+				.then(senIds => {
+
+					let searchIds = [
+						...recIds,
+						...senIds
+					];
+
+					User.find({ '_id': { $in: searchIds } })
+						.then(users => {
+							res.json(users)
+						})
+						.catch(err => console.log(err));
+				})
 		})
 		.catch(err => console.log(err));
 });

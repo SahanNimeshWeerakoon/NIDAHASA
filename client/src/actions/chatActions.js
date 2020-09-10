@@ -10,7 +10,7 @@ export const setReceiver = (id) => dispatch => {
 		.catch(err => console.log(err));
 }
 
-export const loadReceivers = (id) => dispatch => {
+export const loadReceivers = id => dispatch => {
 	axios.get(`http://localhost:5000/api/chats/chatlist/${id}`)
 		.then(res => dispatch({
 			type: GET_CHAT_LIST,

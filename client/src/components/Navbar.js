@@ -22,10 +22,11 @@ class Navbar extends Component {
 
     render() {
         const { isAuthenticated, user } = this.props.auth;
-        
+
         const authLinks = (
             <Fragment>
                 <NavLink to="/manager" className="nav-link">Manager</NavLink>
+                <NavLink to="/chat/view" className="nav-link">Chat</NavLink>
                 <NavLink to="#" className="nav-link" onClick={this.props.logout}>Logout</NavLink>
             </Fragment>
         );
