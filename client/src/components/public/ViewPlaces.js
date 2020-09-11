@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { fetchPlaces } from '../../actions/placeAction'
 import TopPlaces from '../modules/TopPlaces'
-import Pagination from 'react-js-pagination';
+import Pagination from 'react-js-pagination'
+import SearchBar from '../modules/SearchBar'
 import { connect } from 'react-redux'
 
 const ViewPlaces = ({ places, fetchPlaces }) => {
@@ -28,6 +29,7 @@ const ViewPlaces = ({ places, fetchPlaces }) => {
 	
 	return (
 		<div className="view-places container">
+			<SearchBar />
 			<TopPlaces isAllPlaces={true} startPlace={startPage} endPlace={endPage} />
 			<Pagination
 		          activePage={activePage}

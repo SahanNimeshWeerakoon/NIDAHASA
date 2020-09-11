@@ -1,0 +1,49 @@
+.search-div {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	margin-top: 50px;
+	&:hover {
+		cursor: pointer;
+		input {
+			width: 60%;
+			background: $gradient-dark;
+			padding: 13px;
+			opacity: 0.7;
+			&::placeholder {
+				color: #fff;
+			}
+		}
+		button {
+			margin-left: 0px;
+			border-radius: 0px;
+			background: $gradient-dark;
+			color: #fff;
+		}
+	}
+	input {
+		width: 100px;
+		padding: 5px;
+		border: none;
+		transition: 0.5s;
+		position: relative;
+		z-index: 1;
+		&:focus {
+			outline: none;
+		}
+	}
+	button {
+		padding: 13px;
+		border-radius: 50%;
+		border: none;
+		background: #fe4a49;
+		color: $gradient-light;
+		margin-left: -10px;
+		transition: 0.5s;
+		position: relative;
+		z-index: 2;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
