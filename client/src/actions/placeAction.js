@@ -14,6 +14,18 @@ export const fetchPlaces = () => dispatch => {
         });
 }
 
+export const fetchSearchResults = param => dispatch => {
+    dispatch(setPlacesLoading());
+    axios
+        .get(`http://localhost:5000/api/places/search/${param}`)
+        .then(res => {
+            dispatch({
+                type: FETCH_PLACES,
+                payload: res.data
+            })
+        });
+}
+
 export const fetchRandomPlaces = () => dispatch => {
     axios.get('http://localhost:5000/api/places/randomplaces')
         .then(res => {

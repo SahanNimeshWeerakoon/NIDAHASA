@@ -187,6 +187,25 @@ router.post('/uploadplace', auth, (req, res) => {
     });
 });
 
+/*
+*   Get the search results
+*/ 
+router.get('/search/:param', (req, res) => {
+    let param = req.params.param.trim()
+
+    Place.find({
+            $or: [
+                { title: {$regex: '.*'+param+'.*'} },
+                { description: {$regex: '.*'+param+'.*'} },
+            ]
+        }
+    )
+    .then(places => {
+        res.json(places);
+    })
+    .catch(err => console.log(err));
+});
+
 router.get('/', (req, res) => {
     Place.find()
         .then(data => res.json(data))
